@@ -1,0 +1,47 @@
+.btn-icon {
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  font-size: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  user-select: none;
+}
+
+.btn-icon--small {
+  height: 2rem;
+  width: 2rem;
+}
+.btn-icon--small > span {
+  font-size: 1rem;
+}
+
+.btn-icon:active {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.btn-settings {
+  position: fixed;
+  bottom: 1rem;
+  right: 1.5rem;
+}
+
+.btn-flat {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .btn-settings {
+    background: var(--bg);
+    filter: drop-shadow(0 0 0.75rem black);
+  }
+}

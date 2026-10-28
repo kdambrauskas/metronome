@@ -1,0 +1,24 @@
+.dialog {
+  height: 100vh;
+  width: 100vw;
+  border: none;
+  background-color: transparent;
+}
+
+.dialog__content {
+  background-color: rgba(0, 0, 0, 0.4);
+  filter: drop-shadow(0 0 0.75rem black);
+  backdrop-filter: blur(1rem);
+  border-radius: 1rem;
+  border: none;
+  bottom: 0;
+  margin: 0;
+  right: 0;
+  padding: 1rem;
+  max-width: 32rem;
+  position: absolute;
+}
+
+.dialog__btn-close {
+  margin-left: auto;
+}

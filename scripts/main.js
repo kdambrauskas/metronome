@@ -1,9 +1,19 @@
 import { Metronome } from "./metronome.js";
 
-(() => {
-  const metronome = new Metronome();
+const $ = (id) => document.getElementById(id);
 
-  const $ = (id) => document.getElementById(id);
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
+}
+
+(() => {
+  if (isMobileDevice()) {
+    $("shortcut-hints").classList.add("hidden");
+  }
+
+  const metronome = new Metronome();
 
   const MIN = 30,
     MAX = 240;

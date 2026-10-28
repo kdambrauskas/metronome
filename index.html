@@ -14,12 +14,17 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=settings,remove,add"
+    />
+
     <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/buttons.css" />
+    <link rel="stylesheet" href="/styles/dialog.css" />
   </head>
   <body>
     <main class="app">
-      <h1 class="sr">Metronome!</h1>
-
       <section class="stage" aria-hidden="true">
         <svg viewBox="0 0 240 300">
           <path class="housing" d="M52 292 L90 30 Q120 8 150 30 L188 292 Z" />
@@ -43,8 +48,12 @@
         </svg>
       </section>
 
+      <div class="dots" id="dots" aria-hidden="true"></div>
+
       <section class="readout">
-        <button class="step" id="dec" aria-label="Slower">−</button>
+        <button class="btn-icon" id="dec" aria-label="Slower">
+          <span class="material-symbols-outlined"> remove </span>
+        </button>
         <div class="bpm">
           <input
             id="bpm"
@@ -58,34 +67,63 @@
             <span>BPM</span><span id="name" aria-live="polite"></span>
           </p>
         </div>
-        <button class="step" id="inc" aria-label="Faster">+</button>
+        <button class="btn-icon" id="inc" aria-label="Faster">
+          <span class="material-symbols-outlined"> add </span>
+        </button>
+
+        <input
+          id="slider"
+          type="range"
+          min="30"
+          max="240"
+          step="1"
+          aria-label="Tempo slider"
+          class="readout__slider"
+        />
       </section>
-
-      <input
-        id="slider"
-        type="range"
-        min="30"
-        max="240"
-        step="1"
-        aria-label="Tempo slider"
-      />
-
-      <div class="dots" id="dots" aria-hidden="true"></div>
 
       <div class="actions">
         <button class="go" id="go" aria-pressed="false">Start</button>
         <button class="tap" id="tap">Tap tempo</button>
       </div>
 
-      <section class="opts">
+      <p id="shortcut-hints" class="hint">
+        Space starts and stops. Arrow keys change the tempo.
+      </p>
+
+      <button
+        class="btn-icon btn-settings"
+        command="show-modal"
+        commandfor="settings-dialog"
+        aria-label="Show settings"
+      >
+        <span class="material-symbols-outlined"> settings </span>
+      </button>
+    </main>
+
+    <dialog id="settings-dialog" class="dialog">
+      <section class="dialog__content">
         <div class="row">
           <span class="lab" id="bl">Beats per bar</span>
           <div class="count" role="group" aria-labelledby="bl">
-            <button class="step" id="bdec" aria-label="Fewer beats">−</button>
+            <button
+              class="btn-icon btn-icon--small"
+              id="bdec"
+              aria-label="Fewer beats"
+            >
+              <span class="material-symbols-outlined"> remove </span>
+            </button>
             <output id="bval">4</output>
-            <button class="step" id="binc" aria-label="More beats">+</button>
+            <button
+              class="btn-icon btn-icon--small"
+              id="binc"
+              aria-label="More beats"
+            >
+              <span class="material-symbols-outlined"> add </span>
+            </button>
           </div>
         </div>
+
         <div class="row">
           <span class="lab" id="sl">Subdivision</span>
           <div class="seg" id="seg" role="group" aria-labelledby="sl">
@@ -95,6 +133,7 @@
             <button data-sub="4" aria-pressed="false">16ths</button>
           </div>
         </div>
+
         <div class="row">
           <label for="vol">Volume</label>
           <input
@@ -106,10 +145,19 @@
             value="0.7"
           />
         </div>
-      </section>
 
-      <p class="hint">Space starts and stops. Arrow keys change the tempo.</p>
-    </main>
+        <div class="row">
+          <button
+            commandfor="settings-dialog"
+            command="close"
+            class="btn-flat dialog__btn-close"
+            aria-label="Close settings dialog"
+          >
+            Close
+          </button>
+        </div>
+      </section>
+    </dialog>
 
     <script type="module" src="./scripts/main.js"></script>
   </body>
