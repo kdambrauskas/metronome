@@ -16,7 +16,7 @@
 
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=settings,remove,add"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=settings,remove,add,play_arrow,stop"
     />
 
     <link rel="stylesheet" href="./styles/main.css" />
@@ -48,57 +48,65 @@
         </svg>
       </section>
 
-      <div class="dots" id="dots" aria-hidden="true"></div>
+      <div class="controls">
+        <div class="dots" id="dots" aria-hidden="true"></div>
 
-      <section class="readout">
-        <button class="btn-icon" id="dec" aria-label="Slower">
-          <span class="material-symbols-outlined"> remove </span>
-        </button>
-        <div class="bpm">
+        <section class="readout">
+          <button class="btn-icon" id="dec" aria-label="Slower">
+            <span class="material-symbols-outlined"> remove </span>
+          </button>
+          <div class="bpm">
+            <input
+              id="bpm"
+              type="number"
+              min="30"
+              max="240"
+              inputmode="numeric"
+              aria-label="Tempo in beats per minute"
+            />
+            <p class="meta">
+              <span>BPM</span><span id="name" aria-live="polite"></span>
+            </p>
+          </div>
+          <button class="btn-icon" id="inc" aria-label="Faster">
+            <span class="material-symbols-outlined"> add </span>
+          </button>
+
           <input
-            id="bpm"
-            type="number"
+            id="slider"
+            type="range"
             min="30"
             max="240"
-            inputmode="numeric"
-            aria-label="Tempo in beats per minute"
+            step="1"
+            aria-label="Tempo slider"
+            class="readout__slider"
           />
-          <p class="meta">
-            <span>BPM</span><span id="name" aria-live="polite"></span>
-          </p>
+        </section>
+
+        <div class="actions">
+          <button class="btn-start" id="go" aria-pressed="false">
+            <span class="material-symbols-outlined" id="play-icon">
+              play_arrow
+            </span>
+            <span class="material-symbols-outlined hidden" id="stop-icon">
+              stop
+            </span>
+          </button>
+
+          <button
+            class="btn-icon btn-settings"
+            command="show-modal"
+            commandfor="settings-dialog"
+            aria-label="Show settings"
+          >
+            <span class="material-symbols-outlined"> settings </span>
+          </button>
         </div>
-        <button class="btn-icon" id="inc" aria-label="Faster">
-          <span class="material-symbols-outlined"> add </span>
-        </button>
 
-        <input
-          id="slider"
-          type="range"
-          min="30"
-          max="240"
-          step="1"
-          aria-label="Tempo slider"
-          class="readout__slider"
-        />
-      </section>
-
-      <div class="actions">
-        <button class="go" id="go" aria-pressed="false">Start</button>
-        <button class="tap" id="tap">Tap tempo</button>
+        <p id="shortcut-hints" class="hint">
+          Space starts and stops. Arrow keys change the tempo.
+        </p>
       </div>
-
-      <p id="shortcut-hints" class="hint">
-        Space starts and stops. Arrow keys change the tempo.
-      </p>
-
-      <button
-        class="btn-icon btn-settings"
-        command="show-modal"
-        commandfor="settings-dialog"
-        aria-label="Show settings"
-      >
-        <span class="material-symbols-outlined"> settings </span>
-      </button>
     </main>
 
     <dialog id="settings-dialog" class="dialog">
@@ -132,6 +140,12 @@
             <button data-sub="3" aria-pressed="false">Triplets</button>
             <button data-sub="4" aria-pressed="false">16ths</button>
           </div>
+        </div>
+
+        <div class="row">
+          <span class="lab">Tempo</span>
+          <span id="tempo-readout" class="lab"></span>
+          <button class="tap" id="tap">Tap tempo</button>
         </div>
 
         <div class="row">

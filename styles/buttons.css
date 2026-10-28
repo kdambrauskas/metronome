@@ -24,12 +24,6 @@
   border-color: var(--ink);
 }
 
-.btn-settings {
-  position: fixed;
-  bottom: 1rem;
-  right: 1.5rem;
-}
-
 .btn-flat {
   border: 1px solid var(--line);
   background: transparent;
@@ -39,9 +33,30 @@
   font-weight: 500;
 }
 
-@media (max-width: 600px) {
-  .btn-settings {
-    background: var(--bg);
-    filter: drop-shadow(0 0 0.75rem black);
-  }
+.btn-settings {
+  align-self: center;
+  justify-self: end;
+}
+
+.btn-start {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  padding: 0;
+  grid-column-start: 2;
+  justify-self: center;
+}
+.btn-start > span {
+  font-size: 3rem;
+}
+
+.btn-start {
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-start[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
 }

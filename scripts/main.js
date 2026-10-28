@@ -36,7 +36,9 @@ function isMobileDevice() {
     arm = $("arm"),
     weight = $("weight"),
     dots = $("dots"),
-    go = $("go");
+    go = $("go"),
+    playIcon = $("play-icon"),
+    stopIcon = $("stop-icon");
 
   /* ---------- Tempo ---------- */
   function setBpm(v) {
@@ -45,6 +47,7 @@ function isMobileDevice() {
     inp.value = v;
     slider.value = v;
     $("name").textContent = NAMES.find((n) => v < n[0])[1];
+    $("tempo-readout").textContent = v;
     const d = 170 - (110 * (v - MIN)) / (MAX - MIN);
     weight.setAttribute("transform", `translate(0 ${-d.toFixed(1)})`);
   }
@@ -53,7 +56,8 @@ function isMobileDevice() {
     metronome.start();
 
     arm.classList.remove("idle");
-    go.textContent = "Stop";
+    playIcon.classList.add("hidden");
+    stopIcon.classList.remove("hidden");
     go.setAttribute("aria-pressed", "true");
   }
 
@@ -63,7 +67,8 @@ function isMobileDevice() {
     arm.classList.add("idle");
     arm.style.transform = "rotate(0deg)";
     mark(-1);
-    go.textContent = "Start";
+    playIcon.classList.remove("hidden");
+    stopIcon.classList.add("hidden");
     go.setAttribute("aria-pressed", "false");
   }
 
